@@ -1,0 +1,7 @@
+# ODT 1.0
+# Table Start
+# Title: mmArchive Data Table, Thu May 16 19:02:45 BST 2024
+# Columns: {Oxs_RungeKuttaEvolve:evolver:Total energy} {Oxs_RungeKuttaEvolve:evolver:Energy calc count} {Oxs_RungeKuttaEvolve:evolver:Max dm/dt} Oxs_RungeKuttaEvolve:evolver:dE/dt {Oxs_RungeKuttaEvolve:evolver:Delta E} Oxs_FixedZeeman:zeeman:Energy Oxs_TimeDriver::Iteration {Oxs_TimeDriver::Stage iteration} Oxs_TimeDriver::Stage Oxs_TimeDriver::mx   Oxs_TimeDriver::my   Oxs_TimeDriver::mz   {Oxs_TimeDriver::Last time step} {Oxs_TimeDriver::Simulation time}
+# Units:                        J                                             {}                                         deg/ns                                 J/s                                   J                                  J                          {}                            {}                          {}                   {}                   {}                   {}                          s                                 s                
+                      -9.0212998850300008e-022                            37                                           8782.1738089999999                   -1.33424029113e-011                  -8.5823986968800006e-024              -9.0212998850300008e-022         6                             6                           0                    -0.15129998912100001  0.67951383528999998  0.71789223490800003        6.3684131688100004e-013              9.9999999999999998e-013       
+# Table End
