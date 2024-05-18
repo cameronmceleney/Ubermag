@@ -1,0 +1,120 @@
+# MIF 2.2
+
+SetOptions {
+  basename PrimarySpinchain
+  scalar_output_format %.12g
+  scalar_field_output_format {binary 8}
+  vector_field_output_format {binary 8}
+}
+
+# BoxAtlas for fixedLHS_atlas
+Specify Oxs_BoxAtlas:fixedLHS_atlas {
+  xrange { 0.0 1e-09 }
+  yrange { 0.0 4e-09 }
+  zrange { 0.0 4e-09 }
+  name fixedLHS
+}
+
+# BoxAtlas for driven_atlas
+Specify Oxs_BoxAtlas:driven_atlas {
+  xrange { 1e-09 3.0000000000000004e-09 }
+  yrange { 0.0 4e-09 }
+  zrange { 0.0 4e-09 }
+  name driven
+}
+
+# BoxAtlas for free_atlas
+Specify Oxs_BoxAtlas:free_atlas {
+  xrange { 3.0000000000000004e-09 5.9000000000000006e-08 }
+  yrange { 0.0 4e-09 }
+  zrange { 0.0 4e-09 }
+  name free
+}
+
+# BoxAtlas for fixedRHS_atlas
+Specify Oxs_BoxAtlas:fixedRHS_atlas {
+  xrange { 5.9000000000000006e-08 6e-08 }
+  yrange { 0.0 4e-09 }
+  zrange { 0.0 4e-09 }
+  name fixedRHS
+}
+
+# BoxAtlas for entire_atlas
+Specify Oxs_BoxAtlas:entire_atlas {
+  xrange { 0.0 6e-08 }
+  yrange { 0.0 4e-09 }
+  zrange { 0.0 4e-09 }
+  name entire
+}
+
+# MultiAtlas
+Specify Oxs_MultiAtlas:main_atlas {
+  atlas :fixedLHS_atlas
+  atlas :driven_atlas
+  atlas :free_atlas
+  atlas :fixedRHS_atlas
+  atlas :entire_atlas
+  xrange { 0.0 6e-08 }
+  yrange { 0.0 4e-09 }
+  zrange { 0.0 4e-09 }
+}
+
+# RectangularMesh
+Specify Oxs_RectangularMesh:mesh {
+  cellsize { 9.999999999999999e-10 1e-09 1e-09 }
+  atlas :main_atlas
+}
+
+# FixedZeeman
+Specify Oxs_FixedZeeman:SpinchainZeemanStatic {
+  field {0.0 0.0 79577.47154594767}
+}
+
+# UniformExchange
+Specify Oxs_UniformExchange:SpinchainExchange {
+  A 1.6e-11
+}
+
+# DMI of crystallographic class T
+Specify Oxs_DMI_T:SpinchainDMI {
+  default_D 0.0015
+  atlas :main_atlas
+  D {
+    entire entire 0.0015
+  }
+}
+
+# Demag
+Specify Oxs_Demag:SpinchainDemag {
+}
+
+# m0 file
+Specify Oxs_FileVectorField:m0 {
+  file m0.omf
+  atlas :main_atlas
+}
+
+# m0_norm
+Specify Oxs_VecMagScalarField:m0_norm {
+    field :m0
+}
+
+# CGEvolver
+Specify Oxs_CGEvolve:evolver {
+  fixed_spins {main_atlas fixedLHS fixedRHS}
+}
+
+# MinDriver
+Specify Oxs_MinDriver {
+  evolver :evolver
+  mesh :mesh
+  Ms :m0_norm
+  m0 :m0
+  stopping_mxHxm 0.1
+}
+
+Destination table mmArchive
+Destination mags mmArchive
+
+Schedule DataTable table Stage 1
+Schedule Oxs_MinDriver::Magnetization mags Stage 1
