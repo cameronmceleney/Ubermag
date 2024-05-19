@@ -79,6 +79,11 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# Ubermag
+include/macrospin/
+include/PrimarySpinchain/
+
+
 # IPython
 profile_default/
 ipython_config.py
