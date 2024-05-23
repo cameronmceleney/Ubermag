@@ -17,9 +17,9 @@ import discretisedfield as df
 # ----------------------------- Program Information ----------------------------
 
 """
-Description of what ubermag_system_properties.py does
+Description of what custom_system_properties.py does
 """
-PROGRAM_NAME = "ubermag_system_properties.py"
+PROGRAM_NAME = "custom_system_properties.py"
 """
 Created on 23 May 24 by Cameron Aidan McEleney
 """
@@ -54,6 +54,7 @@ class SystemProperties:
     lz: float
     cell: tuple = field(default_factory=lambda: (1e-9, 1e-9, 1e-9))
     p1: tuple = field(default_factory=lambda: (0, 0, 0))
+    units: tuple = field(default_factory=lambda: ('m', 'm', 'm'))
     p2: tuple = field(init=False)
     numcells: tuple = field(init=False)
 
@@ -73,11 +74,28 @@ class SubRegion:
     p1: tuple = field(default_factory=tuple)
     p2: tuple = field(default_factory=tuple)
     region: df.Region = field(init=False, default=None)
+    dims: tuple = field(init=False, default_factory=tuple)
+    cellsize: tuple = field(init=False, default_factory=tuple)
+    units: tuple = field(init=False, default_factory=tuple)
 
-    def __call__(self, p1=None, p2=None, cellsize=None, units=None, auto_create=True):
+    def __call__(self, p1=None, p2=None, cellsize=None, units=None, dims=None, auto_create=True):
 
         if p1 is None or p2 is None:
-            print('Invalid args in call')
+            if self.p1 is not None and self.p2 is not None:
+                if cellsize is not None:
+                    self.cellsize = cellsize
+
+                if units is not None:
+                    if type(units) is tuple:
+                        self.units = units
+                    elif len(units) == 1:
+                        self.p1 = tuple(coord * units for coord in self.p1)
+                        self.p2 = tuple(coord * units for coord in self.p2)
+
+                if dims is not None:
+                    self.dims = dims
+            else:
+                print('Invalid args in call')
         else:
             self.p1 = p1
             self.p2 = p2
@@ -85,7 +103,7 @@ class SubRegion:
             if cellsize is not None:
                 self.p1 = tuple(self.p1[j] * cellsize[j] for j in range(3))
                 self.p2 = tuple(self.p2[j] * cellsize[j] for j in range(3))
-            elif units is not None:
+            elif units is not None and type(units) is not tuple:
                 self.p1 = tuple(coord * units for coord in self.p1)
                 self.p2 = tuple(coord * units for coord in self.p2)
 
