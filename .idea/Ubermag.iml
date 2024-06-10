@@ -18,6 +18,11 @@
       <excludeFolder url="file://$MODULE_DIR$/include/breaking_test" />
       <excludeFolder url="file://$MODULE_DIR$/include/dmi_test" />
       <excludeFolder url="file://$MODULE_DIR$/include/stdprob3" />
+      <excludeFolder url="file://$MODULE_DIR$/include/compute_tests" />
+      <excludeFolder url="file://$MODULE_DIR$/include/dmi_sp" />
+      <excludeFolder url="file://$MODULE_DIR$/include/my_dmi_test2" />
+      <excludeFolder url="file://$MODULE_DIR$/include/mydmitest" />
+      <excludeFolder url="file://$MODULE_DIR$/include/timedriver_therm_heun_evolver_nodriver" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12 (Ubermag)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

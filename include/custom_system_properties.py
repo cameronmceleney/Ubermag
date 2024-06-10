@@ -49,9 +49,17 @@ def loggingSetup():
 
 @dataclass
 class SystemProperties:
-    lx: float
-    ly: float
-    lz: float
+    """ Class to store the properties of the system being simulated.
+
+    Args:
+    @param length: Length of the system, commonly the x-axis (called `lx`)
+    @param width: Width of the system, commonly the y-axis (called `ly`)
+    @param thickness: Thickness of the system, commonly the z-axis (called `lz`)
+    @param cell: Tuple of the cell sizes in the x, y, and z directions often given as (dx, dy, dz)
+    """
+    length: float
+    width: float
+    thickness: float
     cell: tuple = field(default_factory=lambda: (0e-9, 0e-9, 0e-9))
     p1: tuple = field(default_factory=lambda: (0, 0, 0))
     units: tuple = field(default=('m', 'm', 'm'))
@@ -61,23 +69,23 @@ class SystemProperties:
     def __post_init__(self):
         if len(self.cell) == 3 and all(c > 0 for c in self.cell):
             self.update_lengths()
-        self.p2 = (self.lx, self.ly, self.lz)
+        self.p2 = (self.length, self.width, self.thickness)
 
     def update_lengths(self):
         if len(self.cell) == 3 and all(c > 0 for c in self.cell):
-            self.lx *= self.cell[0]
-            self.ly *= self.cell[1]
-            self.lz *= self.cell[2]
+            self.length *= self.cell[0]
+            self.width *= self.cell[1]
+            self.thickness *= self.cell[2]
 
-            self.p2 = (self.lx, self.ly, self.lz)
+            self.p2 = (self.length, self.width, self.thickness)
         else:
             raise ValueError("Cell must be a tuple of three non-zero values")
 
     def update_numcells(self):
         if len(self.cell) == 3 and all(c > 0 for c in self.cell):
-            self.numcells = (int(self.lx / self.cell[0]),
-                             int(self.ly / self.cell[1]),
-                             int(self.lz / self.cell[2]))
+            self.numcells = (int(self.length / self.cell[0]),
+                             int(self.width / self.cell[1]),
+                             int(self.thickness / self.cell[2]))
         else:
             raise ValueError("Cell must be a tuple of three non-zero values")
 
