@@ -13,6 +13,7 @@ from typing import Dict, List
 
 # Ubermag modules
 import discretisedfield as df
+import numpy as np
 
 # ----------------------------- Program Information ----------------------------
 
@@ -83,9 +84,9 @@ class SystemProperties:
 
     def update_numcells(self):
         if len(self.cell) == 3 and all(c > 0 for c in self.cell):
-            self.numcells = (int(self.length / self.cell[0]),
-                             int(self.width / self.cell[1]),
-                             int(self.thickness / self.cell[2]))
+            self.numcells = (int(np.ceil(self.length / self.cell[0])),
+                             int(np.ceil(self.width / self.cell[1])),
+                             int(np.ceil(self.thickness / self.cell[2])))
         else:
             raise ValueError("Cell must be a tuple of three non-zero values")
 
