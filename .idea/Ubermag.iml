@@ -4,6 +4,12 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tutorials" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/include/Uberwidgets/metadata" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/include" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/include/Uberwidgets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/include/Uberwidgets/user_interface" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/include/Uberwidgets/region_designer_interface" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/include/Uberwidgets/region_designer_interface/regions_and_meshes_feature/panels_modelling" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.ipynb_checkpoints" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/include/.ipynb_checkpoints" />
@@ -24,7 +30,7 @@
       <excludeFolder url="file://$MODULE_DIR$/include/mydmitest" />
       <excludeFolder url="file://$MODULE_DIR$/include/timedriver_therm_heun_evolver_nodriver" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12 (Ubermag)" jdkType="Python SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
